@@ -2,6 +2,8 @@
 """
 Funtion to demonstrate pascal's triangle
 """
+
+
 def pascal_triangle(n):
     """This function returns Pascal's triangle"""
     if n <= 0:
