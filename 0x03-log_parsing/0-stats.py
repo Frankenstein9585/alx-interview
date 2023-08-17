@@ -8,7 +8,7 @@ status_codes = [200, 301, 400, 401, 403, 404, 405, 500]
 total_file_size = 0
 status_dict = {}
 for code in status_codes:
-    status_dict[code] = 0
+    status_dict[str(code)] = 0
 format_pattern = (r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - '
                   r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\] "GET '
                   r'/projects/260 HTTP/1\.1" \d{3} \d+')
@@ -22,7 +22,7 @@ try:
         # increase total file size
         file_size = line.split()[-1]
         total_file_size += int(file_size)
-        status_code = int(line.split()[-2])
+        status_code = line.split()[-2]
         status_dict[status_code] += 1
         if number_of_lines % 10 == 0:
             print('File size:', total_file_size)
