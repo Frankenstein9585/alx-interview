@@ -13,6 +13,15 @@ format_pattern = (r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - '
                   r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\] "GET '
                   r'/projects/260 HTTP/1\.1" \d{3} \d+')
 
+
+def print_metrics():
+    """Prints the logs"""
+    print('File size:', total_file_size)
+    for key in sorted(status_dict.keys()):
+        if status_dict[key] != 0:
+            print('{}: {}'.format(key, status_dict[key]))
+
+
 try:
     for line in sys.stdin:
         if not re.match(format_pattern, line):
@@ -25,13 +34,7 @@ try:
         status_code = line.split()[-2]
         status_dict[status_code] += 1
         if number_of_lines % 10 == 0:
-            print('File size:', total_file_size)
-            for k, v in status_dict.items():
-                if v != 0:
-                    print('{}: {}'.format(k, v))
+            print_metrics()
 
 except KeyboardInterrupt:
-    print('File size:', total_file_size)
-    for k, v in status_dict.items():
-        if v != 0:
-            print('{}: {}'.format(k, v))
+    print_metrics()
