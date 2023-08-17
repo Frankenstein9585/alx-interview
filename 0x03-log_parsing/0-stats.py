@@ -31,7 +31,7 @@ try:
                     print('{}: {}'.format(k, v))
 
 except KeyboardInterrupt:
-    print('File size: ', total_file_size)
+    print('File size:', total_file_size)
     for k, v in status_dict.items():
         if v != 0:
             print('{}: {}'.format(k, v))
