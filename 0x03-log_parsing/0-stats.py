@@ -1,40 +1,45 @@
 #!/usr/bin/python3
 """This script reads stdin line by line and computes some metrics"""
-import re
 import sys
 
-number_of_lines = 0
-status_codes = [200, 301, 400, 401, 403, 404, 405, 500]
-total_file_size = 0
-status_dict = {}
-for code in status_codes:
-    status_dict[str(code)] = 0
-format_pattern = (r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - '
-                  r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\] "GET '
-                  r'/projects/260 HTTP/1\.1" \d{3} \d+')
+status_dict = {
+    "200": 0,
+    "301": 0,
+    "400": 0,
+    "401": 0,
+    "403": 0,
+    "404": 0,
+    "405": 0,
+    "500": 0
+}
+
+file_size = 0
 
 
 def print_metrics():
-    """Prints the logs"""
-    print('File size:', total_file_size)
-    for key in sorted(status_dict.keys()):
-        if status_dict[key] != 0:
-            print('{}: {}'.format(key, status_dict[key]))
+    """prints of the logs"""
+    print("File size: {}".format(file_size))
+    for status in sorted(status_dict.keys()):
+        if status_dict[status]:
+            print("{}: {}".format(status, status_dict[status]))
 
 
-try:
-    for line in sys.stdin:
-        if not re.match(format_pattern, line):
-            continue
-        # increase number of lines
-        number_of_lines += 1
-        # increase total file size
-        file_size = line.split()[-1]
-        total_file_size += int(file_size)
-        status_code = line.split()[-2]
-        status_dict[status_code] += 1
-        if number_of_lines % 10 == 0:
-            print_metrics()
-
-except KeyboardInterrupt:
+if __name__ == "__main__":
+    count = 0
+    try:
+        for line in sys.stdin:
+            try:
+                elems = line.split()
+                file_size += int(elems[-1])
+                if elems[-2] in status_dict:
+                    status_dict[elems[-2]] += 1
+            except Exception:
+                pass
+            if count == 9:
+                print_metrics()
+                count = -1
+            count += 1
+    except KeyboardInterrupt:
+        print_metrics()
+        raise
     print_metrics()
