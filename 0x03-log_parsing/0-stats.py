@@ -25,7 +25,7 @@ try:
         status_code = int(line.split()[-2])
         status_dict[status_code] += 1
         if number_of_lines % 10 == 0:
-            print('File size: ', total_file_size)
+            print('File size:', total_file_size)
             for k, v in status_dict.items():
                 if v != 0:
                     print('{}: {}'.format(k, v))
