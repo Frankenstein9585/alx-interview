@@ -16,7 +16,7 @@ format_pattern = (r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - '
 try:
     for line in sys.stdin:
         if not re.match(format_pattern, line):
-            pass
+            continue
         # increase number of lines
         number_of_lines += 1
         # increase total file size
