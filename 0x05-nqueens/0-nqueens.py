@@ -39,7 +39,7 @@ def solve_n_queens(n: int) -> list[list[int]]:
 
 try:
     if len(sys.argv) != 2:
-        print('Usage: nqueens N\n')
+        print('Usage: nqueens N')
         sys.exit(1)
     args = int(sys.argv[1])
     if args < 4:
