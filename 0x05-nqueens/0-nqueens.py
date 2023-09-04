@@ -57,4 +57,4 @@ if __name__ == '__main__':
             index_result[i].append([boards[i].index(row), row.index('Q')])
 
     for solution in index_result:
-        print(solution, ' ')
+        print(solution, '')
