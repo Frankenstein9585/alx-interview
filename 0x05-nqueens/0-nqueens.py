@@ -37,23 +37,24 @@ def solve_n_queens(n: int) -> list[list[int]]:
     return result
 
 
-try:
-    if len(sys.argv) != 2:
-        print('Usage: nqueens N')
+if __name__ == '__main__':
+    try:
+        if len(sys.argv) != 2:
+            print('Usage: nqueens N')
+            sys.exit(1)
+        args = int(sys.argv[1])
+        if args < 4:
+            print("N must be at least 4")
+            sys.exit(1)
+    except ValueError:
+        print("N must be a number")
         sys.exit(1)
-    args = int(sys.argv[1])
-    if args < 4:
-        print("N must be at least 4")
-        sys.exit(1)
-except ValueError:
-    print("N must be a number")
-    sys.exit(1)
 
-boards = solve_n_queens(args)
-index_result = [[] for _ in range(len(boards))]
-for i in range(len(index_result)):
-    for row in boards[i]:
-        index_result[i].append([boards[i].index(row), row.index('Q')])
+    boards = solve_n_queens(args)
+    index_result = [[] for _ in range(len(boards))]
+    for i in range(len(index_result)):
+        for row in boards[i]:
+            index_result[i].append([boards[i].index(row), row.index('Q')])
 
-for solution in index_result:
-    print(solution)
+    for solution in index_result:
+        print(solution)
