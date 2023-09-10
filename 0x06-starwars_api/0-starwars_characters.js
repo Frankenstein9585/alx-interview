@@ -38,4 +38,7 @@ function getTitle (movieId) {
 }
 
 const movieId = process.argv[2];
+if (!movieId  || isNaN(movieId)) {
+  process.exit(1);
+}
 getTitle(movieId);
