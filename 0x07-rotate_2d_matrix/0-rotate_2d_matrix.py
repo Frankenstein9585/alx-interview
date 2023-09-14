@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """Rotate 2D Matrix"""
-from typing import List
 
 
-def rotate_2d_matrix(matrix: List[List[int]]) -> None:
+def rotate_2d_matrix(matrix: list[list[int]]) -> None:
     """Rotates a 2D Matrix in place"""
     copy = [row[:] for row in matrix]
     size = len(matrix)
