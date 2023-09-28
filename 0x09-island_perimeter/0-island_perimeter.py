@@ -2,7 +2,7 @@
 """Solves the Island Perimeter interview question"""
 
 
-def island_perimeter(grid: list[list[int]]) -> int:
+def island_perimeter(grid):
     """Solves the Island Perimeter problem"""
     perimeter = 0
     for i in range(len(grid)):
@@ -24,5 +24,3 @@ def island_perimeter(grid: list[list[int]]) -> int:
                 if grid[i + 1][j] == 0:  # down
                     perimeter += 1
     return perimeter
-
-
